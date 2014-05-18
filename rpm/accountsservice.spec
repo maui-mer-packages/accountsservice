@@ -80,15 +80,14 @@ rm -rf %{buildroot}
 %make_install
 
 # >> install post
+%find_lang accounts-service
 # << install post
-
-%find_lang accountsservice
 
 %post libs -p /sbin/ldconfig
 
 %postun libs -p /sbin/ldconfig
 
-%files -f accountsservice.lang
+%files -f accounts-service.lang
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING INSTALL NEWS README TODO
 %{_sysconfdir}/dbus-1/system.d/org.freedesktop.Accounts.conf
