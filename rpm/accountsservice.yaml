@@ -14,6 +14,8 @@ Sources    :
     - accountsservice-%{version}.tar.xz
 SetupOptions: -q -n %{name}-%{version}/upstream
 
+Configure: autogen
+
 PkgConfigBR:
     - gio-2.0
     - gio-unix-2.0

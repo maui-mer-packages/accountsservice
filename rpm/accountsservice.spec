@@ -66,6 +66,7 @@ files needed to build applications that use accountsservice-libs.
 # >> build pre
 # << build pre
 
+%autogen --disable-static
 %configure --disable-static
 make %{?_smp_mflags}
 
