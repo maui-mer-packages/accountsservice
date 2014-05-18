@@ -1,0 +1,68 @@
+Name       : accountsservice
+Version    : 0.6.37
+Release    : 1
+Group      : System/Daemons
+License    : GPLv3
+Summary    : D-Bus interfaces for querying and manipulating user account information
+Description: |
+  The AccountService project provides a set of D-Bus
+  interfaces for querying and manipulating user account
+  information and an implementation of these interfaces,
+  based on the useradd, usermod and userdel commands.
+URL        : http://www.freedesktop.org/wiki/Software/AccountsService/
+Sources    : 
+    - accountsservice-%{version}.tar.xz
+SetupOptions: -q -n %{name}-%{version}/upstream
+
+PkgConfigBR:
+    - gio-2.0
+    - gio-unix-2.0
+    - libsystemd-login
+    - polkit-gobject-1
+
+PkgBR:
+    - pam-devel
+    - gobject-introspection-devel
+    - intltool
+
+Requires:
+    - polkit
+    - shadow-utils
+
+Files:
+    - "%doc AUTHORS COPYING INSTALL NEWS README TODO"
+    - "%{_sysconfdir}/dbus-1/system.d/org.freedesktop.Accounts.conf"
+    - "%{_libexecdir}/accounts-daemon"
+    - "%{_datadir}/dbus-1/interfaces/org.freedesktop.Accounts.xml"
+    - "%{_datadir}/dbus-1/interfaces/org.freedesktop.Accounts.User.xml"
+    - "%{_datadir}/dbus-1/system-services/org.freedesktop.Accounts.service"
+    - "%{_datadir}/polkit-1/actions/org.freedesktop.accounts.policy"
+    - "%dir %{_localstatedir}/lib/AccountsService/"
+    - "%dir %{_localstatedir}/lib/AccountsService/users"
+    - "%dir %{_localstatedir}/lib/AccountsService/icons"
+    - "%{_unitdir}/accounts-daemon.service"
+
+SubPackages:
+    - Name: libs
+      Summary: Client-side library to talk to accountsservice
+      Group: Development/Libraries
+      Description: |
+        The accountsservice-libs package contains a library that can
+        be used by applications that want to interact with the accountsservice
+        daemon.
+      Files:
+          - "%{_libdir}/libaccountsservice.so.*"
+          - "%{_libdir}/girepository-1.0/AccountsService-1.0.typelib"
+    - Name: devel
+      Summary: Development files for accountsservice-libs
+      Group: Development/System
+      Description: |
+        This accountsservice-devel package contains headers and other
+        files needed to build applications that use accountsservice-libs.
+      Files:
+          - "%{_includedir}/accountsservice-1.0"
+          - "%{_libdir}/libaccountsservice.so"
+          - "%{_libdir}/pkgconfig/accountsservice.pc"
+          - "%{_datadir}/gir-1.0/AccountsService-1.0.gir"
+#          - "%dir %{_datadir}/gtk-doc/html/libaccountsservice"
+#          - "%{_datadir}/gtk-doc/html/libaccountsservice/*"
