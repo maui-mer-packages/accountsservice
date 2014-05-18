@@ -99,7 +99,7 @@ rm -rf %{buildroot}
 %dir %{_localstatedir}/lib/AccountsService/
 %dir %{_localstatedir}/lib/AccountsService/users
 %dir %{_localstatedir}/lib/AccountsService/icons
-%{_unitdir}/accounts-daemon.service
+%{_lib}/systemd/system/accounts-daemon.service
 # >> files
 # << files
 
