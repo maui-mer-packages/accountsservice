@@ -20,8 +20,9 @@ Configure: autogen
 PkgConfigBR:
     - gio-2.0
     - gio-unix-2.0
-    - libsystemd-login
+    - systemd
     - polkit-gobject-1
+    - dbus-glib-1
 
 PkgBR:
     - pam-devel
@@ -31,6 +32,14 @@ PkgBR:
 Requires:
     - polkit
     - shadow-utils
+    - systemd
+
+RequiresPost:
+    - systemd
+RequiresPreUn:
+    - systemd
+RequiresPostUn:
+    - systemd
 
 Files:
     - "%doc AUTHORS COPYING INSTALL NEWS README TODO"
@@ -43,7 +52,7 @@ Files:
     - "%dir %{_localstatedir}/lib/AccountsService/"
     - "%dir %{_localstatedir}/lib/AccountsService/users"
     - "%dir %{_localstatedir}/lib/AccountsService/icons"
-    - "/%{_lib}/systemd/system/accounts-daemon.service"
+    - "%{_unitdir}/accounts-daemon.service"
 FilesInput: accounts-service.lang
 
 SubPackages:

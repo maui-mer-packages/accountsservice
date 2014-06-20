@@ -24,11 +24,13 @@ Requires(post): systemd
 Requires(postun): systemd
 BuildRequires:  pkgconfig(gio-2.0)
 BuildRequires:  pkgconfig(gio-unix-2.0)
-BuildRequires:  pkgconfig(libsystemd-login)
+BuildRequires:  pkgconfig(systemd)
 BuildRequires:  pkgconfig(polkit-gobject-1)
+BuildRequires:  pkgconfig(dbus-glib-1)
 BuildRequires:  pam-devel
 BuildRequires:  gobject-introspection-devel
 BuildRequires:  intltool
+BuildRequires:  systemd
 
 %description
 The AccountService project provides a set of D-Bus
@@ -87,18 +89,6 @@ rm -rf %{buildroot}
 %find_lang accounts-service
 # << install post
 
-%preun
-if [ "$1" -eq 0 ]; then
-systemctl stop accounts-daemon.service
-fi
-
-%post
-systemctl daemon-reload
-systemctl reload-or-try-restart accounts-daemon.service
-
-%postun
-systemctl daemon-reload
-
 %post libs -p /sbin/ldconfig
 
 %postun libs -p /sbin/ldconfig
@@ -115,7 +105,7 @@ systemctl daemon-reload
 %dir %{_localstatedir}/lib/AccountsService/
 %dir %{_localstatedir}/lib/AccountsService/users
 %dir %{_localstatedir}/lib/AccountsService/icons
-/%{_lib}/systemd/system/accounts-daemon.service
+%{_unitdir}/accounts-daemon.service
 # >> files
 # << files
 
