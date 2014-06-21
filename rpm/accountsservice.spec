@@ -24,13 +24,14 @@ Requires(post): systemd
 Requires(postun): systemd
 BuildRequires:  pkgconfig(gio-2.0)
 BuildRequires:  pkgconfig(gio-unix-2.0)
+BuildRequires:  pkgconfig(glib-2.0)
+BuildRequires:  pkgconfig(gobject-2.0)
 BuildRequires:  pkgconfig(systemd)
 BuildRequires:  pkgconfig(polkit-gobject-1)
 BuildRequires:  pkgconfig(dbus-glib-1)
 BuildRequires:  pam-devel
 BuildRequires:  gobject-introspection-devel
 BuildRequires:  intltool
-BuildRequires:  systemd
 
 %description
 The AccountService project provides a set of D-Bus
@@ -73,7 +74,10 @@ files needed to build applications that use accountsservice-libs.
 # << build pre
 
 %autogen --disable-static
-%configure --disable-static
+%configure --disable-static \
+    --enable-user-heuristics \
+    --with-minimum-uid=100000
+
 make %{?_smp_mflags}
 
 # >> build post

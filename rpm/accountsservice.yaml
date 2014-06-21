@@ -16,10 +16,15 @@ SetupOptions: -q -n %{name}-%{version}/upstream
 NoAutoLocale: true
 
 Configure: autogen
+ConfigOptions:
+    - --enable-user-heuristics
+    - --with-minimum-uid=100000
 
 PkgConfigBR:
     - gio-2.0
     - gio-unix-2.0
+    - glib-2.0
+    - gobject-2.0
     - systemd
     - polkit-gobject-1
     - dbus-glib-1
