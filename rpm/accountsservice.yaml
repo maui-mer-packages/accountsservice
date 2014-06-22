@@ -33,6 +33,7 @@ PkgBR:
     - pam-devel
     - gobject-introspection-devel
     - intltool
+    - python
 
 Requires:
     - polkit

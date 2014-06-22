@@ -32,6 +32,7 @@ BuildRequires:  pkgconfig(dbus-glib-1)
 BuildRequires:  pam-devel
 BuildRequires:  gobject-introspection-devel
 BuildRequires:  intltool
+BuildRequires:  python
 
 %description
 The AccountService project provides a set of D-Bus
